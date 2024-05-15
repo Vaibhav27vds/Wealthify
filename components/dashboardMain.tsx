@@ -58,14 +58,14 @@ export function DashboardMain() {
             <Package2 className="h-6 w-6" />
             <span className="sr-only">Acme Inc</span>
           </Link>
-          <Link
-            href="#"
+          <a
+            href="/"
             className="text-foreground transition-colors hover:text-foreground"
           >
             Dashboard
-          </Link>
+          </a>
           <Link
-            href="#"
+            href="/transactions"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Transactions
