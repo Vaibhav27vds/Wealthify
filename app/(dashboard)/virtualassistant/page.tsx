@@ -1,10 +1,9 @@
+import { VirtualAssistantDashboard } from '@/components/VirtualAssistantDashboard'
 import React from 'react'
 
 function page() {
   return (
-    <div>
-      VA
-    </div>
+     <VirtualAssistantDashboard />
   )
 }
 
