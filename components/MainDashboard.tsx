@@ -1,3 +1,4 @@
+"use client"
 import Link from "next/link"
 import {
   Activity,
@@ -10,7 +11,7 @@ import {
   Search,
   Users,
 } from "lucide-react"
-
+import { useUser } from "@clerk/nextjs"
 import {
   Avatar,
   AvatarFallback,
@@ -45,8 +46,30 @@ import {
 } from "@/components/ui/table"
 import { UserButton } from "@clerk/nextjs"
 import { ModeToggle } from "./mode-toggle"
+import { useEffect, useState } from "react";
+import { getData, setUpUser } from "@/appwrite/user";
 
 export function DashboardMain() {
+  const {user, isLoaded}  = useUser();
+  const [userdata, setUserdata] = useState({
+    transactions : [],
+    transactiondescription : [],
+    netstatus : 0,
+    savings : [],
+    savingsnet : 0,
+    investments : [],
+    investmentsdescription : [],
+    totalinvestment : 0
+  });
+  useEffect(() => {
+    if(!isLoaded) return;
+    if(!user) return;
+    setUpUser(user.id);
+    getData(user.id).then((res) => {
+      setUserdata(res);
+      console.log(res)
+    });
+  },[user])
   return (
     <div className="flex min-h-screen w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -164,9 +187,9 @@ export function DashboardMain() {
               <DollarSign className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">$45,231.89</div>
+              <div className="text-2xl font-bold">₹{userdata.netstatus || 0}</div>
               <p className="text-xs text-muted-foreground">
-                +20.1% from last month
+                Just updtated 👍
               </p>
             </CardContent>
           </Card>
@@ -178,10 +201,7 @@ export function DashboardMain() {
               <Users className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">+2350</div>
-              <p className="text-xs text-muted-foreground">
-                +180.1% from last month
-              </p>
+              <div className="text-2xl font-bold">+{userdata.transactions.length} transactions </div>
             </CardContent>
           </Card>
           <Card x-chunk="dashboard-01-chunk-2">
@@ -190,9 +210,9 @@ export function DashboardMain() {
               <CreditCard className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">+12,234</div>
+              <div className="text-2xl font-bold">₹{userdata.savingsnet || 0}</div>
               <p className="text-xs text-muted-foreground">
-                +19% from last month
+                good
               </p>
             </CardContent>
           </Card>
@@ -202,7 +222,7 @@ export function DashboardMain() {
               <Activity className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">+573</div>
+              <div className="text-2xl font-bold">{userdata.netstatus || 0}</div>
               <p className="text-xs text-muted-foreground">
                 +201 since last hour
               </p>

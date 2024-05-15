@@ -79,21 +79,22 @@ export async function addInvestment(userId,investment,description){
 }
 
 export async function getData(userId){
-    const res  = await databases.getDocument(
+    userId = userId;
+    const res  = await databases.listDocuments(
         process.env.NEXT_PUBLIC_APP_DATABASE_ID,
         process.env.NEXT_PUBLIC_APP_COLLECTION_ID,
-        userId
-    );
-    console.log(res)
+        [Query.equal('userid', [userId])]
+    )
+    console.log(res,'here')
     const final = {
-        transactions : res.transaction,
-        transactiondescription : res.transactiondescription,
-        net : res.netstatus,
-        savings : res.savings,
-        savingsnet : res.savingsnet,
-        investments : res.investments,
-        investmentsdescription : res.investmentsdescription,
-        totalinvestment : res.totalinvestment
+        transactions : res.documents[0].transaction,
+        transactiondescription : res.documents[0].transactiondescription,
+        netstatus : res.documents[0].netstatus,
+        savings : res.documents[0].savings,
+        savingsnet : res.documents[0].savingsnet,
+        investments : res.documents[0].investments,
+        investmentsdescription : res.documents[0].investmentsdescription,
+        totalinvestment : res.documents[0].totalinvestment
     }
     console.log(final)
     return final;
