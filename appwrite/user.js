@@ -27,8 +27,9 @@ export async function setUpUser(userId) {
     console.log('User exists',checkUser);
     return "user exists";
 }
+
 export async function addTransaction(userId,transaction,description){
-    const res = await databases.getDocument(
+    var res = await databases.getDocument(
         process.env.NEXT_PUBLIC_APP_DATABASE_ID,
         process.env.NEXT_PUBLIC_APP_COLLECTION_ID,
         userId
@@ -45,16 +46,56 @@ export async function addTransaction(userId,transaction,description){
 }
 
 export async function updateSavings(userId,saving){
-    const res = await databases.getDocument(
+    var res = await databases.getDocument(
         process.env.NEXT_PUBLIC_APP_DATABASE_ID,
         process.env.NEXT_PUBLIC_APP_COLLECTION_ID,
         userId
     );
-    res = res.documents[0].savings + saving;
+    res = res.documents[0].savingsnet + saving;
+    res = res.documents[0].savings.push(saving);
     console.log(await databases.updateDocument(
         process.env.NEXT_PUBLIC_APP_DATABASE_ID,
         process.env.NEXT_PUBLIC_APP_COLLECTION_ID,
         userId,
         res) 
     );
+}
+
+export async function addInvestment(userId,investment,description){
+    var res = await databases.getDocument(
+        process.env.NEXT_PUBLIC_APP_DATABASE_ID,
+        process.env.NEXT_PUBLIC_APP_COLLECTION_ID,
+        userId
+    );
+    res = res.documents[0].totalinvestment + investment;
+    res = res.documents[0].investments.push(investment);
+    res = res.documents[0].investmentsdescription.push(description);
+    console.log(await databases.updateDocument(
+        process.env.NEXT_PUBLIC_APP_DATABASE_ID,
+        process.env.NEXT_PUBLIC_APP_COLLECTION_ID,
+        userId,
+        res) 
+    );
+}
+
+export async function getData(userId){
+    userId = userId;
+    const res  = await databases.listDocuments(
+        process.env.NEXT_PUBLIC_APP_DATABASE_ID,
+        process.env.NEXT_PUBLIC_APP_COLLECTION_ID,
+        [Query.equal('userid', [userId])]
+    )
+    console.log(res,'here')
+    const final = {
+        transactions : res.documents[0].transaction,
+        transactiondescription : res.documents[0].transactiondescription,
+        netstatus : res.documents[0].netstatus,
+        savings : res.documents[0].savings,
+        savingsnet : res.documents[0].savingsnet,
+        investments : res.documents[0].investments,
+        investmentsdescription : res.documents[0].investmentsdescription,
+        totalinvestment : res.documents[0].totalinvestment
+    }
+    console.log(final)
+    return final;
 }
