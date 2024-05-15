@@ -1,9 +1,10 @@
+import { SettingsDashboard } from '@/components/SettingsDashboard'
 import React from 'react'
 
 function page() {
   return (
     <div>
-      Settings
+      <SettingsDashboard />
     </div>
   )
 }

@@ -23,7 +23,7 @@ import { Input } from "@/components/ui/input"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { UserButton } from "@clerk/nextjs"
 
-export function Dashboard() {
+export function SettingsDashboard() {
   return (
     <div className="flex min-h-screen w-full flex-col">
       <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
@@ -36,28 +36,28 @@ export function Dashboard() {
             <span className="sr-only">Acme Inc</span>
           </Link>
           <Link
-            href="#"
+            href="/"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Dashboard
           </Link>
           <Link
-            href="#"
+            href="/transactions"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Orders
+            Transaction
           </Link>
           <Link
-            href="#"
+            href="/analytics"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Products
+            Analytics
           </Link>
           <Link
-            href="#"
+            href="/visualassistant"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
-            Customers
+            VisualAssistant
           </Link>
           <Link
             href="#"
@@ -164,18 +164,18 @@ export function Dashboard() {
           <div className="grid gap-6">
             <Card x-chunk="dashboard-04-chunk-1">
               <CardHeader>
-                <CardTitle>Store Name</CardTitle>
+                <CardTitle>Write Your  Issue</CardTitle>
                 <CardDescription>
-                  Used to identify your store in the marketplace.
+                  Kindly describe the issue in detail.Our team will get back on you 
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <form>
-                  <Input placeholder="Store Name" />
+                  <Input placeholder="Issue" />
                 </form>
               </CardContent>
               <CardFooter className="border-t px-6 py-4">
-                <Button>Save</Button>
+                <Button>Send</Button>
               </CardFooter>
             </Card>
             <Card x-chunk="dashboard-04-chunk-2">
