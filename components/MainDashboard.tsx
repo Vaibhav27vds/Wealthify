@@ -71,19 +71,19 @@ export function DashboardMain() {
             Transactions
           </Link>
           <Link
-            href="#"
+            href="/analytics"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Analytics
           </Link>
           <Link
-            href="#"
+            href="virtualassistant"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             VirtualAssistant
           </Link>
           <Link
-            href="#"
+            href="/settings"
             className="text-muted-foreground transition-colors hover:text-foreground"
           >
             Settings
