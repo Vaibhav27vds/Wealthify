@@ -66,6 +66,7 @@ import {
   TooltipProvider,
 } from "@/components/ui/tooltip"
 import { UserButton } from "@clerk/nextjs"
+import { ModeToggle } from "./mode-toggle"
 
 export function TransactionsDashboard() {
   return (
@@ -83,7 +84,7 @@ export function TransactionsDashboard() {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="#"
+                href="/"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <Home className="h-5 w-5" />
@@ -219,18 +220,14 @@ export function TransactionsDashboard() {
             <BreadcrumbList>
               <BreadcrumbItem>
                 <BreadcrumbLink asChild>
-                  <Link href="#">Dashboard</Link>
+                  <Link href="/">Dashboard</Link>
                 </BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="#">Products</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>All Products</BreadcrumbPage>
+                <BreadcrumbPage>
+                <Link href="#">All Transactions</Link>
+                </BreadcrumbPage>
               </BreadcrumbItem>
             </BreadcrumbList>
           </Breadcrumb>
@@ -242,6 +239,7 @@ export function TransactionsDashboard() {
               className="w-full rounded-lg bg-background pl-8 md:w-[200px] lg:w-[336px]"
             />
           </div>
+          <ModeToggle />
          <UserButton />
         </header>
         <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8">
@@ -306,13 +304,13 @@ export function TransactionsDashboard() {
                         <TableHead className="hidden w-[100px] sm:table-cell">
                           <span className="sr-only">Image</span>
                         </TableHead>
-                        <TableHead>Name</TableHead>
+                        <TableHead>Credited/Debited To</TableHead>
                         <TableHead>Status</TableHead>
                         <TableHead className="hidden md:table-cell">
                           Price
                         </TableHead>
                         <TableHead className="hidden md:table-cell">
-                          Total Sales
+                          Tag
                         </TableHead>
                         <TableHead className="hidden md:table-cell">
                           Created at
@@ -329,7 +327,7 @@ export function TransactionsDashboard() {
                             alt="Product image"
                             className="aspect-square rounded-md object-cover"
                             height="64"
-                            src="/PaymentOptions/wallet-icon.svg"
+                            src="/PaymentOptions/visa-icon.svg"
                             width="64"
                           />
                         </TableCell>
@@ -343,7 +341,7 @@ export function TransactionsDashboard() {
                           $499.99
                         </TableCell>
                         <TableCell className="hidden md:table-cell">
-                          25
+                          Gym
                         </TableCell>
                         <TableCell className="hidden md:table-cell">
                           2023-07-12 10:42 AM
