@@ -29,7 +29,7 @@ export async function setUpUser(userId) {
 }
 
 export async function addTransaction(userId,transaction,description){
-    const res = await databases.getDocument(
+    var res = await databases.getDocument(
         process.env.NEXT_PUBLIC_APP_DATABASE_ID,
         process.env.NEXT_PUBLIC_APP_COLLECTION_ID,
         userId
@@ -46,7 +46,7 @@ export async function addTransaction(userId,transaction,description){
 }
 
 export async function updateSavings(userId,saving){
-    const res = await databases.getDocument(
+    var res = await databases.getDocument(
         process.env.NEXT_PUBLIC_APP_DATABASE_ID,
         process.env.NEXT_PUBLIC_APP_COLLECTION_ID,
         userId
@@ -62,7 +62,7 @@ export async function updateSavings(userId,saving){
 }
 
 export async function addInvestment(userId,investment,description){
-    const res = await databases.getDocument(
+    var res = await databases.getDocument(
         process.env.NEXT_PUBLIC_APP_DATABASE_ID,
         process.env.NEXT_PUBLIC_APP_COLLECTION_ID,
         userId
@@ -84,14 +84,17 @@ export async function getData(userId){
         process.env.NEXT_PUBLIC_APP_COLLECTION_ID,
         userId
     );
+    console.log(res)
     const final = {
-        transactions : res.documents[0].transaction,
-        transactiondescription : res.documents[0].transactiondescription,
-        net : res.documents[0].netstatus,
-        savings : res.documents[0].savings,
-        savingsnet : res.documents[0].savingsnet,
-        investments : res.documents[0].investments,
-        investmentsdescription : res.documents[0].investmentsdescription,
-        totalinvestment : res.documents[0].totalinvestment
+        transactions : res.transaction,
+        transactiondescription : res.transactiondescription,
+        net : res.netstatus,
+        savings : res.savings,
+        savingsnet : res.savingsnet,
+        investments : res.investments,
+        investmentsdescription : res.investmentsdescription,
+        totalinvestment : res.totalinvestment
     }
+    console.log(final)
+    return final;
 }
